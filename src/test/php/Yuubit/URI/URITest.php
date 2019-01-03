@@ -34,10 +34,10 @@ class URITest extends TestCase
         $this->uri1 = URI::fromString(self::URI_1);
     }
 
-//    function testNormalize() {
-//        $uri = $this->uri1->normalize();
-//        self::assertEquals(self::URI_0, (string) $uri);
-//    }
+    function testNormalize() {
+        $uri = $this->uri1->normalize();
+        self::assertEquals(self::URI_0, (string) $uri);
+    }
 
     function testEquals() {
         self::assertTrue($this->uri0->equals($this->uri0));
