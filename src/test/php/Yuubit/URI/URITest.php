@@ -18,6 +18,8 @@ class URITest extends TestCase
     const ABSOLUTE = "/another/path";
     const RELATIVE = "go/there";
 
+    const FILE = "file:///etc/somefile";
+
     /**
      * @var URI
      */
@@ -50,5 +52,15 @@ class URITest extends TestCase
 
         $relativeUri = $this->uri0->resolve(self::RELATIVE);
         self::assertEquals(URI::fromString("http://easy.com/simple/path/go/there"), $relativeUri);
+    }
+
+    function testFile() {
+        $uri = URI::fromString(self::FILE);
+        $expectedRelative = URI::fromString("file:///etc");
+
+        self::assertEquals($uri->resolve(".."), $expectedRelative);
+
+        $expectedRelative = URI::fromString("file:///etc/anotherFile");
+        self::assertEquals($uri->resolve("../anotherFile"), $expectedRelative);
     }
 }

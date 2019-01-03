@@ -94,10 +94,10 @@ class URI
     {
         return new URI(
             strtolower($this->scheme),
-            strtolower($this->authority),
-            strtolower(preg_replace("/" . Regex::REPLACABLES . "/", "/", $this->path)),
-            strtolower($this->query),
-            strtolower($this->fragment)
+            $this->authority,
+            preg_replace("/" . Regex::REPLACABLES . "/", "", $this->path),
+            $this->query,
+            $this->fragment
         );
     }
 

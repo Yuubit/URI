@@ -22,7 +22,7 @@ class Regex extends Enum
     const SCHEME = "^[" . self::NOT_RESERVED . "]+" . self::SCHEME_SEPARATOR . "$";
 
     const AUTHORITY_MARKER = "\/\/";
-    const AUTHORITY = "^" . self::AUTHORITY_MARKER . "[" . self::NOT_RESERVED . ":]+$";
+    const AUTHORITY = "^" . self::AUTHORITY_MARKER . "[" . self::NOT_RESERVED . ":]*$";
 
     const PATH_SEPERATOR = "/";
     const PATH = "(^\/[" . self::NOT_RESERVED . "]+$)|((^\/[" . self::NOT_RESERVED . "]+)(\/[" . self::NOT_RESERVED . "]+)+$)";
@@ -34,5 +34,5 @@ class Regex extends Enum
     const FRAGMENT_MARKER = "#";
     const FRAGMENT = "^" . self::FRAGMENT_MARKER . "[" . self::NOT_RESERVED . "]+$";
 
-    const REPLACABLES = "([" . self::NOT_RESERVED . "]\/\.\.\/)|(\/\.\/)|(\/\/)";
+    const REPLACABLES = "(\/[" . self::NOT_RESERVED . "]+\/\.\.)|(\/\.(?=\/))|(\/(?=\/))";
 }
