@@ -9,6 +9,8 @@
 namespace Yuubit\URI;
 
 
+use Yuubit\Stream\IInputStream;
+use Yuubit\Stream\StreamFactory;
 use Yuubit\Tokenizer\IStream;
 use Yuubit\URI\Exception\MalformedException;
 use Yuubit\URI\Exception\UnknownSchemeException;
@@ -192,6 +194,10 @@ class URI
     public function getFragment(): string
     {
         return $this->fragment;
+    }
+
+    public function openInputStream(): IInputStream {
+        return StreamFactory::createInputStream($this);
     }
 
     public function __toString()

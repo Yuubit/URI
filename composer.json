@@ -9,7 +9,7 @@
         "oop-library"
     ],
     "license": "MIT",
-    "version": "1.1.0",
+    "version": "1.2.0-alpha",
     "authors": [
         {
             "name": "Felix Marezki",
@@ -28,10 +28,11 @@
             "Yuubit\\URI\\": "src/test/php/Yuubit/URI"
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=7.0",
         "yuubit/tokenizer": "1.0.*",
+        "yuubit/stream": "1.0.0-alpha",
         "myclabs/php-enum": "1.6.*"
     },
     "require-dev": {
