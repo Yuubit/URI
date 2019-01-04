@@ -154,6 +154,46 @@ class URI
         ))->normalize();
     }
 
+    /**
+     * @return string
+     */
+    public function getScheme(): string
+    {
+        return str_replace(":" , "", $this->scheme);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthority(): string
+    {
+        return str_replace("//" , "", $this->authority);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getQuery(): string
+    {
+        return $this->query;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFragment(): string
+    {
+        return $this->fragment;
+    }
+
     public function __toString()
     {
         return $this->scheme .
