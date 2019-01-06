@@ -196,10 +196,6 @@ class URI
         return $this->fragment;
     }
 
-    public function openInputStream(): IInputStream {
-        return StreamFactory::createInputStream($this);
-    }
-
     public function __toString()
     {
         return $this->scheme .
