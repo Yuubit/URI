@@ -97,10 +97,20 @@ class URI
         return new URI(
             strtolower($this->scheme),
             $this->authority,
-            preg_replace("/" . Regex::REPLACABLES . "/", "", $this->path),
+            $this->replaceTillNoneFound("/" . Regex::REPLACABLES . "/", "", $this->path),
             $this->query,
             $this->fragment
         );
+    }
+
+    private function replaceTillNoneFound($regex, $replacement, $subject) {
+        $replaced = preg_replace($regex, $replacement, $subject);
+
+        if(preg_match($regex, $replaced) !== false && preg_match($regex, $replaced) !== 0) {
+            return $this->replaceTillNoneFound($regex, $replacement, $replaced);
+        }
+
+        return $replaced;
     }
 
     /**

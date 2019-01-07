@@ -15,6 +15,7 @@ class URITest extends TestCase
 {
     const URI_0 = "http://easy.com/simple/path";
     const URI_1 = "HTTP://easy.com/./simple/path";
+    const URI_2 = "HTTP://easy.com/simple/path/some/where/../..";
     const ABSOLUTE = "/another/path";
     const RELATIVE = "go/there";
 
@@ -30,10 +31,16 @@ class URITest extends TestCase
      */
     private $uri1;
 
+    /**
+     * @var URI
+     */
+    private $uri2;
+
     protected function setUp()
     {
         $this->uri0 = URI::fromString(self::URI_0);
         $this->uri1 = URI::fromString(self::URI_1);
+        $this->uri2 = URI::fromString(self::URI_2);
     }
 
     function testNormalize() {
@@ -44,6 +51,7 @@ class URITest extends TestCase
     function testEquals() {
         self::assertTrue($this->uri0->equals($this->uri0));
         self::assertTrue($this->uri0->equals($this->uri1));
+        self::assertTrue($this->uri1->equals($this->uri2));
     }
 
     function testResolve() {
@@ -60,7 +68,7 @@ class URITest extends TestCase
 
         self::assertEquals($uri->resolve(".."), $expectedRelative);
 
-        $expectedRelative = URI::fromString("file:///etc/anotherFile");
-        self::assertEquals($uri->resolve("../anotherFile"), $expectedRelative);
+        $expectedRelative = URI::fromString("file:///anotherFile");
+        self::assertEquals($uri->resolve("/../../anotherFile"), $expectedRelative);
     }
 }
