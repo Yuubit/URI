@@ -75,7 +75,7 @@ class URI
      * @throws MalformedException
      * @throws UnknownSchemeException
      */
-    static function fromString(string $uri): URI
+    static function fromString(string $uri)
     {
         $tokens = (new URITokenizer())->tokenizeURI($uri);
 
@@ -92,7 +92,7 @@ class URI
      * Removes unnecessary parts from the uri as well as it corrects Capping.
      * @return URI
      */
-    function normalize(): URI
+    function normalize()
     {
         return new URI(
             strtolower($this->scheme),
@@ -118,7 +118,7 @@ class URI
      * @param string $uri
      * @return URI
      */
-    function resolve(string $uri): URI
+    function resolve(string $uri)
     {
         if (strpos($uri, "//") === 0 || strpos($uri, "/") === 0) {
             return $this->resolvePath($uri);
@@ -134,19 +134,29 @@ class URI
      * @param URI $uri
      * @return bool
      */
-    function equals(URI $uri): bool
+    function equals(URI $uri)
     {
         return (string)$this->normalize() === (string)$uri->normalize();
     }
 
-    private function resolvePath(string $path): URI
+    /**
+     * @param string $path
+     * @return URI
+     * @throws MalformedException
+     * @throws UnknownSchemeException
+     */
+    private function resolvePath(string $path)
     {
         return self::fromString(
             $this->scheme . $this->authority . $path
         )->normalize();
     }
 
-    private function resolveFragment(string $path): URI
+    /**
+     * @param string $path
+     * @return URI
+     */
+    private function resolveFragment(string $path)
     {
         return (new URI(
             $this->scheme,
@@ -157,7 +167,11 @@ class URI
         ))->normalize();
     }
 
-    private function resolvePathRelative(string $path): URI
+    /**
+     * @param string $path
+     * @return URI
+     */
+    private function resolvePathRelative(string $path)
     {
         return (new URI(
             $this->scheme,
@@ -169,7 +183,7 @@ class URI
     /**
      * @return string
      */
-    public function getScheme(): string
+    public function getScheme()
     {
         return str_replace(":" , "", $this->scheme);
     }
@@ -177,7 +191,7 @@ class URI
     /**
      * @return string
      */
-    public function getAuthority(): string
+    public function getAuthority()
     {
         return str_replace("//" , "", $this->authority);
     }
@@ -185,7 +199,7 @@ class URI
     /**
      * @return string
      */
-    public function getPath(): string
+    public function getPath()
     {
         return $this->path;
     }
@@ -193,7 +207,7 @@ class URI
     /**
      * @return string
      */
-    public function getQuery(): string
+    public function getQuery()
     {
         return $this->query;
     }
@@ -201,7 +215,7 @@ class URI
     /**
      * @return string
      */
-    public function getFragment(): string
+    public function getFragment()
     {
         return $this->fragment;
     }
