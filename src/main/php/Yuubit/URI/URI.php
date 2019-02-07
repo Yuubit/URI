@@ -54,11 +54,11 @@ class URI
      * @param string $fragment
      */
     private function __construct(
-        string $scheme = "",
-        string $authority = "",
-        string $path = "",
-        string $query = "",
-        string $fragment = ""
+        $scheme = "",
+        $authority = "",
+        $path = "",
+        $query = "",
+        $fragment = ""
     )
     {
         $this->scheme = $scheme;
